@@ -1,1 +1,1 @@
-This folder contains research papers, links, data files, etc. for our project.
+This folder contains research papers, links, data files, etc. for the project.
