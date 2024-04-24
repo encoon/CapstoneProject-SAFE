@@ -1,1 +1,1 @@
-All codes for raspberry pi OS will be saved in this folder
+All codes/related files for raspberry pi OS will be saved in this folder

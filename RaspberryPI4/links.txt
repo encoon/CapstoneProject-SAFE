@@ -1,0 +1,15 @@
+* Raspberry Pi
+
+
+* Grove Base Hat
+    -Grove Base Hat Wiki
+    https://wiki.seeedstudio.com/Grove_Base_Hat_for_Raspberry_Pi/
+
+    -Example Code for EMG
+    https://forum.seeedstudio.com/t/emg-sensor-and-raspberri-pi/258793
+
+
+* EMG Sensor Implementation
+    -With Arduino youtube video
+    https://www.youtube.com/watch?v=0FsTPQY1bJw&ab_channel=SaravananAL
+    
