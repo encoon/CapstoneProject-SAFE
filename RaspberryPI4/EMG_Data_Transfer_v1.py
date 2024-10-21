@@ -47,16 +47,19 @@ def main():
             #COB = 1/(sum_1^L(|w_k|))*sum_1^L(|w_k|*(2^{L-k}-1))
             #Calculate Wavelet Standard Deviation (WSD)
             #WSD = sqrt((sum_k^L(|w_k|*(L-k-COB^2)))/(sum_1^L(w_k)))
-            if(sum!=0):
+            if(w_sum!=0):
                 cob_sum = 0
                 wsd_sum = 0
                 count = 0
                 for n in w:
                     count+=1
                     cob_sum += abs(n)*(2**(L-count)-1)
-                    wsd_sum+=abs(n)*(L-count-COB**2)
-                COB_Arr.append(cob_sum/sum)
-                WSD_Arr.append(math.sqrt(wsd_sum/sum))
+                COB = cob_sum/w_sum
+                COB_Arr.append(cob_sum/w_sum)
+
+                for n in w:
+                     wsd_sum+=abs(n)*(L-count-COB**2)
+                WSD_Arr.append(math.sqrt(wsd_sum/w_sum))
         else:
             #Calculate Center of Balance Transition (ICOB)
             #ICOB = sqrt((1/N)sum_1^N((COB - avg(COB))^2))
