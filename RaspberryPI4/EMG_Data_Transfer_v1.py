@@ -55,7 +55,7 @@ def main():
                     count+=1
                     cob_sum += abs(n)*(2**(L-count)-1)
                 COB = cob_sum/w_sum
-                COB_Arr.append(cob_sum/w_sum)
+                COB_Arr.append(COB)
 
                 for n in w:
                      wsd_sum+=abs(n)*(L-count-COB**2)
