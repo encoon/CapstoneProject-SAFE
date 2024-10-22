@@ -63,7 +63,7 @@ def main():
 
                     for n in w:
                          wsd_sum+=abs(n)*(L-count-COB**2)
-                    WSD_Arr.append(math.sqrt(wsd_sum/w_sum))
+                    WSD_Arr.append(math.sqrt(abs(wsd_sum/w_sum)))
             else:
                 #Calculate Center of Balance Transition (ICOB)
                 #ICOB = sqrt((1/N)sum_1^N((COB - avg(COB))^2))
@@ -82,7 +82,7 @@ def main():
                 avg_WSD = sum(WSD_Arr)/(len(WSD_Arr)-1)
                 WSD_sum = 0
                 for n in WSD_Arr:
-                    WSD_sum += math.abs(n - avg_WSD)
+                    WSD_sum += abs(n - avg_WSD)
                 ME = WSD_sum/len(WSD_Arr)
 
                 #Reset WSD_Arr
@@ -98,10 +98,10 @@ def main():
                 AVG_Diff = [0]
                 for n in FC_Arr:
                     last_FC = n
-                AVG_Diff.append(math.abs(n-last_FC))
+                AVG_Diff.append(abs(n-last_FC))
 
-                if(sum(AVG_Diff)/(len(AVG_Diff)-1)<1): #using placeholder until testing gives us better values to use, need to change <1
-                    do_something = 1 #Placeholder for sent signal to out
+                if(sum(AVG_Diff)/(len(AVG_Diff)-1)<100): #using placeholder until testing gives us better values to use, need to change <1
+                    print("Fatigued Muscle")
 
 
 if __name__ == '__main__':
