@@ -35,7 +35,7 @@ def main():
             sens_arr.append(sensor.value)
         else:
             #Grab Wavelet Coefficient (w)
-            w = pywt.wavedec(sens_arr, 'db2')
+            w = pywt.downcoef(sens_arr, 'db2')
             sens_arr = [0]
 
             if(len(COB_Arr)<51): #51 is arbitrary number chosen until testing is done
