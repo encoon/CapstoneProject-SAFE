@@ -100,6 +100,9 @@ def main():
                     last_FC = n
                 AVG_Diff.append(abs(n-last_FC))
 
+		print("Current sum of AVG Diff is: {}".format(AVG_Diff))
+		print("Current length of AVG Diff is: {}".format(len(AVG_Diff)))
+
                 if(sum(AVG_Diff)/(len(AVG_Diff)-1)<100): #using placeholder until testing gives us better values to use, need to change <1
                     print("Fatigued Muscle")
 
