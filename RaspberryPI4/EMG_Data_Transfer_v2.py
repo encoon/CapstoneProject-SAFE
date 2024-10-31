@@ -1,4 +1,5 @@
 import time, sys, math, pywt
+import RPi.GPIO as GPIO
 from grove.adc import ADC                                                                           # type: ignore
 
 __all__ = ["EMGTEST"]
@@ -16,6 +17,9 @@ class EMGTEST(object):
 Grove = EMGTEST
 
 def main():
+
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(4, GPIO.OUT)
     from grove.helper import SlotHelper                                                             #type: ignore
     sh = SlotHelper(SlotHelper.ADC)
     pin = sh.argv2pin()
@@ -125,8 +129,11 @@ def main():
                 print("Current sum of AVG Diff is: {}".format(sum(AVG_Diff)))
                 print("Current length of AVG Diff is: {}".format(len(AVG_Diff)))
 
-                if(sum(AVG_Diff)/(len(AVG_Diff)-1)<10000000): #using placeholder until testing gives us better values to use, need to change <1
+                 if(sum(AVG_Diff)/(len(AVG_Diff)-1)<50): #using placeholder until testing gives us better values to use, need to change <1
                     print("Fatigued Muscle")
+                    GPIO.output(4, GPIO.HIGH)
+                else
+                    GPIO.output(4, GPIO.LOW)
                 
                 AVG_Diff = [0]
                 FC_Arr = [0]
