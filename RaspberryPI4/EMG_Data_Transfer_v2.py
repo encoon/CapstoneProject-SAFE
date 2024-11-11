@@ -129,10 +129,10 @@ def main():
                 print("Current sum of AVG Diff is: {}".format(sum(AVG_Diff)))
                 print("Current length of AVG Diff is: {}".format(len(AVG_Diff)))
 
-                 if(sum(AVG_Diff)/(len(AVG_Diff)-1)<50): #using placeholder until testing gives us better values to use, need to change <1
+                if(sum(AVG_Diff)/(len(AVG_Diff)-1)<50): #using placeholder until testing gives us better values to use, need to change <1
                     print("Fatigued Muscle")
                     GPIO.output(4, GPIO.HIGH)
-                else
+                else:
                     GPIO.output(4, GPIO.LOW)
                 
                 AVG_Diff = [0]
