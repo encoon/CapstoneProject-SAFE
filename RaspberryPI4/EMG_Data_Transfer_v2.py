@@ -27,15 +27,15 @@ def main():
     sensor = EMGTEST(pin)
 
     #Holds multiple COB, WSD, and FC calculations
-    COB_Arr = [0]
-    WSD_Arr = [0]
-    FC_Arr = [0]
-    sens_arr = [0]
+    COB_Arr = []
+    WSD_Arr = []
+    FC_Arr = []
+    sens_arr = []
 
     while True:
         #print("Current Voltage % is: {}".format(sensor.value/10))
 
-        if(len(sens_arr) < 101):
+        if(len(sens_arr) < 1000):
             sens_arr.append(sensor.value)
             #print("Sensor Value: {}".format(sensor.value))
         else:
@@ -43,9 +43,9 @@ def main():
             w = pywt.downcoef('a', sens_arr, 'db2')
             #print("Wavelete coefficients: {}".format(w))
             #print("Wavelete coefficients: {}".format(w))
-            sens_arr = [0]
+            sens_arr = []
 
-            if(len(COB_Arr)<26): #51 is arbitrary number chosen until testing is done
+            if(len(COB_Arr)<30): #51 is arbitrary number chosen until testing is done
                 #Get sum of wavelet coefficients
                 w_sum = 0
                 for n in w:
@@ -75,14 +75,14 @@ def main():
                         #print("L-count: {}".format(L-count))
                     COB = cob_sum/w_sum
                     COB_Arr.append(COB)
-                    print("COB: {}".format(COB))
+                    #print("COB: {}".format(COB))
 
                     count = 0
                     for n in w:
                         count+=1
                         wsd_sum+=abs(n)*(L-count-COB)**2
                     WSD_Arr.append(math.sqrt(abs(wsd_sum/w_sum)))
-                    print("WSD: {}".format(math.sqrt(abs(wsd_sum/w_sum))))
+                    #print("WSD: {}".format(math.sqrt(abs(wsd_sum/w_sum))))
                 else:
                     COB_Arr.append(0)
                     WSD_Arr.append(0)
@@ -95,10 +95,10 @@ def main():
                 for n in COB_Arr:
                     ICOB_sum += abs(n-avg_COB)
                 ICOB = math.sqrt((1/len(COB_Arr)*ICOB_sum))
-                print("ICOB: {}".format(ICOB))
+                #print("ICOB: {}".format(ICOB))
 
 		        #Reset COB_Arr
-                COB_Arr = [0]
+                COB_Arr = []
 
 		        #Calculate Muscular Tissue Effeciency (ME)
 		        #ME = avg(|WSD - avg(WSD)|)
@@ -107,36 +107,41 @@ def main():
                 for n in WSD_Arr:
                     WSD_sum += abs(n - avg_WSD)
                 ME = WSD_sum/len(WSD_Arr)
-                print("ME: {}".format(ME))
+                #print("ME: {}".format(ME))
 
                 #Reset WSD_Arr
-                WSD_Arr = [0]
+                WSD_Arr = []
 
 		        #Add Fatigue Coefficiant
                 FC_Arr.append(ME*ICOB)
-                print("FC: {}".format(ME*ICOB))
-                print("Current Voltage % is: {}".format(sensor.value/10))
+                #print("FC: {}".format(ME*ICOB))
+                #print("Current Voltage % is: {}".format(sensor.value/10))
 	
 	        #Check if we have enough fatigue coefficients to test the average difference
 	        #If the average difference is low enough, alert the user their muscles are fatigued
-            if(len(FC_Arr) > 5): #10 is an arbitrary number chosen until testing is done
+            if(len(FC_Arr) > 9): #10 is an arbitrary number chosen until testing is done
                 last_FC = 0
-                AVG_Diff = [0]
+                AVG_Diff = []
                 for n in FC_Arr:
                     AVG_Diff.append(abs(n-last_FC))
                     last_FC = n
 
-                print("Current sum of AVG Diff is: {}".format(sum(AVG_Diff)))
-                print("Current length of AVG Diff is: {}".format(len(AVG_Diff)))
+                #print("Current sum of AVG Diff is: {}".format(sum(AVG_Diff)))
+                #print("Current length of AVG Diff is: {}".format(len(AVG_Diff)))
 
-                if(sum(AVG_Diff)/(len(AVG_Diff)-1)<50): #using placeholder until testing gives us better values to use, need to change <1
+                #NOTE: Following values are from simulation using range of random values - may need to be adjusted for sensor
+                #If taking ~50 values from sensor, Avg Diff must be somewhere around 50
+                #If taking ~100 or ~1000 values, go <15
+                #If taking ~250 or ~500 values, go <10
+                #If taking ~750 values, go <12
+                if(sum(AVG_Diff)/(len(AVG_Diff))<15): #using placeholder until testing gives us better values to use, need to change <1
                     print("Fatigued Muscle")
                     GPIO.output(4, GPIO.HIGH)
                 else:
                     GPIO.output(4, GPIO.LOW)
                 
-                AVG_Diff = [0]
-                FC_Arr = [0]
+                AVG_Diff = []
+                FC_Arr = []
 
 
 if __name__ == '__main__':
