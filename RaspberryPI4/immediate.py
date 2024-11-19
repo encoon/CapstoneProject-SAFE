@@ -4,6 +4,7 @@ from grove.adc import ADC  # type: ignore
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from threading import Thread
+from collections import deque
 
 __all__ = ["EMGTEST"]
 
@@ -18,10 +19,10 @@ class EMGTEST(object):
 
 Grove = EMGTEST
 
-# Graphing data storage
-COB_graph = []
-WSD_graph = []
-FC_graph = []
+# Graphing data storage with deque for optimized fixed-size buffer
+COB_graph = deque(maxlen=50)
+WSD_graph = deque(maxlen=50)
+FC_graph = deque(maxlen=50)
 
 # Graph setup
 fig, axs = plt.subplots(3, 1, figsize=(10, 8))
@@ -31,20 +32,21 @@ def update_plot(frame):
     for ax in axs:
         ax.clear()
 
-    axs[0].plot(COB_graph[-50:], label="COB", color="blue")
+    # Plot each graph with reduced complexity
+    axs[0].plot(COB_graph, label="COB", color="blue")
     axs[0].set_title("Center of Balance (COB)")
     axs[0].legend()
-    axs[0].grid()
+    axs[0].grid(False)  # Disable grid for faster rendering
 
-    axs[1].plot(WSD_graph[-50:], label="WSD", color="orange")
+    axs[1].plot(WSD_graph, label="WSD", color="orange")
     axs[1].set_title("Wavelet Standard Deviation (WSD)")
     axs[1].legend()
-    axs[1].grid()
+    axs[1].grid(False)
 
-    axs[2].plot(FC_graph[-50:], label="Fatigue Coefficient (FC)", color="red")
+    axs[2].plot(FC_graph, label="Fatigue Coefficient (FC)", color="red")
     axs[2].set_title("Fatigue Coefficient (FC)")
     axs[2].legend()
-    axs[2].grid()
+    axs[2].grid(False)
 
     plt.tight_layout()
 
@@ -66,6 +68,7 @@ def main_logic():
     while True:
         if len(sens_arr) < 1000:
             sens_arr.append(sensor.value)
+            time.sleep(0.005)  # Add slight delay to reduce CPU usage
         else:
             # Grab Wavelet Coefficient (w)
             w = pywt.downcoef('a', sens_arr, 'db2')
@@ -114,7 +117,7 @@ def main_logic():
                         GPIO.output(4, GPIO.LOW)
                     FC_Arr = []
 
-ani = FuncAnimation(fig, update_plot, interval=1000)
+ani = FuncAnimation(fig, update_plot, interval=2000, blit=True)  # Update every 2 seconds with blit enabled
 
 if __name__ == '__main__':
     # Run main logic in a separate thread
