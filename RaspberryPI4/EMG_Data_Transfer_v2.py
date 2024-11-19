@@ -129,12 +129,8 @@ def main():
                 #print("Current sum of AVG Diff is: {}".format(sum(AVG_Diff)))
                 #print("Current length of AVG Diff is: {}".format(len(AVG_Diff)))
 
-                #NOTE: Following values are from simulation using range of random values - may need to be adjusted for sensor
-                #If taking ~50 values from sensor, Avg Diff must be somewhere around 50
-                #If taking ~100 or ~1000 values, go <15
-                #If taking ~250 or ~500 values, go <10
-                #If taking ~750 values, go <12
-                if(sum(AVG_Diff)/(len(AVG_Diff))<15): #using placeholder until testing gives us better values to use, need to change <1
+                #TODO: Find best value for threshold - follows similar trend to simulations
+                if(sum(AVG_Diff)/(len(AVG_Diff))<50):
                     print("Fatigued Muscle")
                     GPIO.output(4, GPIO.HIGH)
                 else:
