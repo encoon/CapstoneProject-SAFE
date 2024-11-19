@@ -75,6 +75,7 @@ def main_logic():
             sens_arr = []
 
             if len(COB_Arr) < 30:
+                w_sum = 0
                 w_sum = sum(abs(n) for n in w)
                 L = 12  # Placeholder for L
 
@@ -126,7 +127,7 @@ def main_logic():
                         GPIO.output(4, GPIO.HIGH)
                     else:
                         GPIO.output(4, GPIO.LOW)
-                        
+
                     AVG_Diff = []
                     FC_Arr = []
 
