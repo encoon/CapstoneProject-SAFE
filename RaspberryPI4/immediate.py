@@ -23,9 +23,10 @@ Grove = EMGTEST
 COB_graph = deque(maxlen=50)
 WSD_graph = deque(maxlen=50)
 FC_graph = deque(maxlen=50)
+EMG_graph = deque(maxlen=50)
 
 # Graph setup
-fig, axs = plt.subplots(3, 1, figsize=(10, 8))
+fig, axs = plt.subplots(4, 1, figsize=(10, 8))
 plt.subplots_adjust(hspace=0.5)
 
 def update_plot(frame):
@@ -48,6 +49,11 @@ def update_plot(frame):
     axs[2].legend()
     axs[2].grid(False)
 
+    axs[3].plot(EMG_graph, label="EMG value (EMG)", color="yellow")
+    axs[3].set_title("EMG Graph")
+    axs[3].legend()
+    axs[3].grid(False)
+
     plt.tight_layout()
 
 def main_logic():
@@ -68,6 +74,8 @@ def main_logic():
     while True:
         if len(sens_arr) < 100:
             sens_arr.append(sensor.value)
+            EMG_graph.append(sensor.value)
+            
             time.sleep(0.005)  # Add slight delay to reduce CPU usage
         else:
             # Grab Wavelet Coefficient (w)
@@ -100,7 +108,7 @@ def main_logic():
                     COB_graph.append(0)
                     WSD_graph.append(0)
             else:
-                avg_COB = sum(COB_Arr) / len(COB_Arr)
+                avg_COB = sum(COB_Arr) / (len(COB_Arr) - 1)
                 ICOB_sum = 0
                 ICOB_sum = sum(abs(n - avg_COB) for n in COB_Arr)
                 ICOB = math.sqrt((1 / len(COB_Arr)) * ICOB_sum)
