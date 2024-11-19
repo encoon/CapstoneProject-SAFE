@@ -118,12 +118,16 @@ def main_logic():
                 if len(FC_Arr) > 5:
                     last_FC = FC_Arr[0]
                     AVG_DIFF = []
-                    AVG_Diff.append[abs(FC_Arr[n] - last_FC) for n in range(1, 6)]
+                    for n in range(1,6):
+                        AVG_Diff.append(abs(FC_Arr[n] - last_FC))
+                        last_FC = FC_Arr[n]
                     if sum(AVG_Diff) / len(AVG_Diff) < 75:
                         print("Fatigued Muscle")
                         GPIO.output(4, GPIO.HIGH)
                     else:
                         GPIO.output(4, GPIO.LOW)
+                        
+                    AVG_Diff = []
                     FC_Arr = []
 
 ani = FuncAnimation(fig, update_plot, interval=100, blit=True)  # Update every 2 seconds with blit enabled
