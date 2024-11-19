@@ -36,21 +36,25 @@ def update_plot(frame):
     # Plot each graph with reduced complexity
     axs[0].plot(COB_graph, label="COB", color="blue")
     axs[0].set_title("Center of Balance (COB)")
+    axs[0].set_ylim(0, 500) 
     axs[0].legend()
     axs[0].grid(False)  # Disable grid for faster rendering
 
     axs[1].plot(WSD_graph, label="WSD", color="orange")
     axs[1].set_title("Wavelet Standard Deviation (WSD)")
+    axs[0].set_ylim(0, 500) 
     axs[1].legend()
     axs[1].grid(False)
 
     axs[2].plot(FC_graph, label="Fatigue Coefficient (FC)", color="red")
     axs[2].set_title("Fatigue Coefficient (FC)")
+    axs[0].set_ylim(0, 500) 
     axs[2].legend()
     axs[2].grid(False)
 
     axs[3].plot(EMG_graph, label="EMG value (EMG)", color="yellow")
     axs[3].set_title("EMG Graph")
+    axs[0].set_ylim(0, 1000) 
     axs[3].legend()
     axs[3].grid(False)
 
