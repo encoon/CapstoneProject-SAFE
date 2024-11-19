@@ -3,6 +3,7 @@ import RPi.GPIO as GPIO
 from grove.adc import ADC  # type: ignore
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
+from threading import Thread
 
 __all__ = ["EMGTEST"]
 
@@ -47,7 +48,7 @@ def update_plot(frame):
 
     plt.tight_layout()
 
-def main():
+def main_logic():
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(4, GPIO.OUT)
     from grove.helper import SlotHelper  # type: ignore
@@ -116,5 +117,9 @@ def main():
 ani = FuncAnimation(fig, update_plot, interval=1000)
 
 if __name__ == '__main__':
-    plt.show(block=False)
-    main()
+    # Run main logic in a separate thread
+    thread = Thread(target=main_logic, daemon=True)
+    thread.start()
+
+    # Show the graph
+    plt.show()
