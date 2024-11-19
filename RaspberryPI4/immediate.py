@@ -66,7 +66,7 @@ def main_logic():
     sens_arr = []
 
     while True:
-        if len(sens_arr) < 1000:
+        if len(sens_arr) < 100:
             sens_arr.append(sensor.value)
             time.sleep(0.005)  # Add slight delay to reduce CPU usage
         else:
@@ -79,10 +79,15 @@ def main_logic():
                 L = 12  # Placeholder for L
 
                 if w_sum != 0:
+                    cob_sum = 0
+                    wsd_sum = 0
+                    count = 0
                     cob_sum = sum(abs(n) * (2**(L - count - 1) - 1) for count, n in enumerate(w))
                     COB = cob_sum / w_sum
                     COB_Arr.append(COB)
                     COB_graph.append(COB)
+
+                    count = 0
 
                     wsd_sum = sum(abs(n) * (L - count - COB)**2 for count, n in enumerate(w))
                     WSD = math.sqrt(abs(wsd_sum / w_sum))
@@ -95,12 +100,15 @@ def main_logic():
                     WSD_graph.append(0)
             else:
                 avg_COB = sum(COB_Arr) / len(COB_Arr)
+                ICOB_sum = 0
                 ICOB_sum = sum(abs(n - avg_COB) for n in COB_Arr)
                 ICOB = math.sqrt((1 / len(COB_Arr)) * ICOB_sum)
                 COB_Arr = []
-
-                avg_WSD = sum(WSD_Arr) / len(WSD_Arr)
-                ME = sum(abs(n - avg_WSD) for n in WSD_Arr) / len(WSD_Arr)
+  
+                avg_WSD = sum(WSD_Arr) / (len(WSD_Arr) - 1)
+                WSD_sum = 0
+                WSD_sum = sum(abs(n - avg_WSD) for n in WSD_Arr)
+                ME = WSD_sum / len(WSD_Arr)
                 WSD_Arr = []
 
                 FC = ME * ICOB
@@ -109,7 +117,8 @@ def main_logic():
 
                 if len(FC_Arr) > 5:
                     last_FC = FC_Arr[0]
-                    AVG_Diff = [abs(FC_Arr[n] - last_FC) for n in range(1, 6)]
+                    AVG_DIFF = []
+                    AVG_Diff.append[abs(FC_Arr[n] - last_FC) for n in range(1, 6)]
                     if sum(AVG_Diff) / len(AVG_Diff) < 75:
                         print("Fatigued Muscle")
                         GPIO.output(4, GPIO.HIGH)
@@ -117,7 +126,7 @@ def main_logic():
                         GPIO.output(4, GPIO.LOW)
                     FC_Arr = []
 
-ani = FuncAnimation(fig, update_plot, interval=2000, blit=True)  # Update every 2 seconds with blit enabled
+ani = FuncAnimation(fig, update_plot, interval=100, blit=True)  # Update every 2 seconds with blit enabled
 
 if __name__ == '__main__':
     # Run main logic in a separate thread
