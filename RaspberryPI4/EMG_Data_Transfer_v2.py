@@ -35,7 +35,7 @@ def main():
     while True:
         #print("Current Voltage % is: {}".format(sensor.value/10))
 
-        if(len(sens_arr) < 1000):
+        if(len(sens_arr) < 100):
             sens_arr.append(sensor.value)
             #print("Sensor Value: {}".format(sensor.value))
         else:
