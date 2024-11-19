@@ -118,19 +118,21 @@ def main():
                 #print("Current Voltage % is: {}".format(sensor.value/10))
 	
 	        #Check if we have enough fatigue coefficients to test the average difference
+            #Amount of Fatigue Coefficients chosen to have a balance between amount of data and speed of code
 	        #If the average difference is low enough, alert the user their muscles are fatigued
-            if(len(FC_Arr) > 9): #10 is an arbitrary number chosen until testing is done
-                last_FC = 0
+            if(len(FC_Arr) > 5): 
+                last_FC = FC_Arr[0]
                 AVG_Diff = []
-                for n in FC_Arr:
-                    AVG_Diff.append(abs(n-last_FC))
-                    last_FC = n
+                for n in range(1,6):
+                    AVG_Diff.append(abs(FC_Arr[n]-last_FC))
+                    last_FC = FC_Arr[n]
 
                 #print("Current sum of AVG Diff is: {}".format(sum(AVG_Diff)))
                 #print("Current length of AVG Diff is: {}".format(len(AVG_Diff)))
 
                 #TODO: Find best value for threshold - follows similar trend to simulations
-                if(sum(AVG_Diff)/(len(AVG_Diff))<50):
+                #Current testing shows 75 to be vaguely best value for threshold - more testing required - suggest raising to 77 or 78
+                if(sum(AVG_Diff)/(len(AVG_Diff))<75):
                     print("Fatigued Muscle")
                     GPIO.output(4, GPIO.HIGH)
                 else:
