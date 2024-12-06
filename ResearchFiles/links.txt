@@ -1,3 +1,5 @@
 What is EMG? Hackaday.io
 https://hackaday.io/project/8823-super-simple-muscle-emg-sensor/details
 
+An EMG Patch for the Real-Time Monitoring of Muscle-Fatigue Conditions During Exercise
+https://pmc.ncbi.nlm.nih.gov/articles/PMC6679275/
