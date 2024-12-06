@@ -1,4 +1,6 @@
 This folder contains the following files:
 
+Authors: Taehoon Kim, Nicholas Eloff, Thomas Green, and Inhyup Lee
+Date: December 06, 2024
 
-PCB design files will be saved in this folder.
+(Explanations of the files)
