@@ -1,0 +1,11 @@
+Part,Quantity,Mouser/Digikey Part #,Manufacturer Part #,Manufacturer,Short Description,Footprint/Package,Datasheet
+D1,1,754-1165-1-ND,APTL3216SURCK,Kingbright,LED RED CLEAR CHIP SMD,1206 SMD,https://www.kingbrightusa.com/images/catalog/SPEC/APTL3216SURCK.pdf
+D2,1,754-1162-1-ND,APTL3216CGCK,Kingbright,LED GREEN CLEAR CHIP SMD,1206 SMD,https://www.kingbrightusa.com/images/catalog/SPEC/APTL3216CGCK.pdf
+"R1, R2, R3, R4",5,311-10KERCT-ND,RMCF0805FT10K0,Stackpole Electronics Inc,RES 10K OHM 1%,0805 SMD,https://www.seielect.com/catalog/sei-rmcf_rmcp.pdf
+"R5, R8",2,RMCF0805JT1K10CT-ND,RMCF0805JT1K10,Stackpole Electronics Inc,RES 1.1K OHM 5%,0805 SMD,https://www.taiwansemi.com/products/datasheet/RS2AA%20SERIES_G14.pdf 
+"R6, R7",2,311-620ARCT-ND,RC0805JR-07620RL,YAGEO,RES 620 OHM 5%,0805 SMD,https://www.yageo.com/upload/media/product/products/datasheet/rchip/PYu-RC_Group_51_RoHS_L_12.pdf
+"C1, C2",2,C1206C104K5RAC7210,399-C1206C104K5RAC7210CT-ND,KEMET,CAP CER 0.1UF,1206 (3216 Metric),https://content.kemet.com/datasheets/KEM_C1002_X7R_SMD.pdf
+C3,1,1206B103K500CT,1292-1600-1-ND,Walsin Technology Corporation,CAP CER 10000PF,1206 (3216 Metric),https://www.passivecomponent.com/wp-content/uploads/datasheet/WTC_MLCC_General_Purpose.pdf
+Q1,1,MMBT3904LT1G,MMBT3904LT1GOSCT-ND,onsemi,TRANS NPN 40V 0.2A SOT23-3,SOT 23-3,https://www.onsemi.com/pdf/datasheet/mmbt3904lt1-d.pdf
+U1,1,TL081HIDBVR,296-TL081HIDBVRCT-ND,Texas Instruments,IC OPAMP JFET 1 CIRCUIT SOT23-5,SOT 23-5,https://www.ti.com/general/docs/suppproductinfo.tsp?distId=10&gotoUrl=http%3A%2F%2Fwww.ti.com%2Flit%2Fgpn%2Ftl084
+U2,1,AT-1220-TT-R,668-1097-ND,"PUI Audio, Inc.",BUZZER MAGNETIC 1.5V 12MM TH,,
