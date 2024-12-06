@@ -7,7 +7,7 @@ Demo day on 12/06 2024.
 Team SAFE has been made up for a project making a product that determines the fatigue point of the muscle. We are using an EMG sensor from a company called 'Myoware', using sesnor Myoware 2.0. The fatigue point gets calculated by using fatigue coefficient by using raspberry pi 4, a grove base hat inverter, and alerts the user with a designed alerting circuit PCB. Refer to the block diagram below.
 
 ## Architecture Diagram
-![Diagram of Block Diagram](./Documents/SAFE_Block_Diagram.png)
+![Diagram of the Block Diagram](./Documents/SAFE_Block_Diagram.png)
 
 ### Members
 Taehoon Kim<br/>
