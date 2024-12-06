@@ -1,1 +1,0 @@
-All datasheet for the components will be saved in this folder
